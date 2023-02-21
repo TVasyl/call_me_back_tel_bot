@@ -8,7 +8,6 @@ require('dotenv').config();
 // const db = require('./db');
 
 // const Notes = db.notes;
-// const randomstring = require("randomstring");
 
 const TelegramApi = require('node-telegram-bot-api')
 const bot = new TelegramApi(process.env.BOT_TOKEN, {polling: true});
@@ -45,7 +44,6 @@ http.createServer((req, res) => {
                 const message = `Мене звати ${userName}, предзвоніть мені будь-ласка на мій номер: +38${userPhone}`;
 
                 bot.sendMessage(process.env.CHAT_ID, message)
-                // bot.sendMessage(123, message)
                 .then(message => {
                     console.log(message);
                     if (message) res.end(JSON.stringify({ 'ok': true}))})
@@ -54,50 +52,6 @@ http.createServer((req, res) => {
                     res.end(JSON.stringify( err.response.body));
                 })
             }
-
-            // if (params.note) {
-                // let note = params.note;
-                // note = note.trim();
-                // console.log(note);
-                // Notes.create({
-                //     url: randomstring.generate({
-                //         length: 24,
-                //         capitalization : 'lowercase'
-                //     }),
-                //     text: note,
-                //     timestamp: Math.floor(Date.now() / 1000),
-                // }).then(result => {
-                //     res.end(JSON.stringify({ 'result': true, "url": result.url }));
-                // }).catch(err => {
-                //     console.log(err);
-                //     res.end(JSON.stringify({ 'result': false, "error": err }));
-
-                // });
-            // }
-            // else if (params.url) {
-            //     let url = params.url;
-            //     url = url.trim();
-            //     console.log(url);
-            //     Notes.findOne({
-            //         where: {
-            //             "url": url
-            //         }
-            //     })
-            //         .then(result => {
-            //             if (result) {
-            //                 res.end(JSON.stringify({ 'result': true, "note": result.text }));
-            //                 // Notes.destroy({where: {id: result.id}}); // if you want delete message!!!
-            //             }
-            //             else {
-            //                 res.end(JSON.stringify({ 'result': false, "text": 'note not found' }));
-            //             }
-            //         })
-            //         .catch(err => {
-            //             console.log(err);
-            //             res.end(JSON.stringify({ 'result': false, "error": err }));
-            //         });
-            // }
-            
         });
     }
 
